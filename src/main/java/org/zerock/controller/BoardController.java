@@ -23,18 +23,14 @@ import lombok.extern.log4j.Log4j;
 public class BoardController {
 	private BoardService service;
 	
-//	@GetMapping("/list")
-//	public void list(Model model) {
-//		log.info("list");
-//		model.addAttribute("list", service.getList());
-//	}
-	
 	@GetMapping("/list")
 	public void list(Criteria cri, Model model) {
-		log.info("list and cri:" + cri);
+		//Criteria는 페이징처리를 위한 VO.
+		//Model은 View로 response를 전달하기위한 데이터가 담긴 객체
+		log.info("cri:" + cri);
+		//model객체에 {list:ArrayList //getList()쿼리결과}
 		model.addAttribute("list", service.getList(cri));
-		//model.addAttribute("pageMaker", new PageDTO(cri,123));
-		
+		log.info("model:" + service.getList(cri));
 		int total = service.getTotal(cri);
 		log.info("total: " + total);
 		model.addAttribute("pageMaker", new PageDTO(cri,total));
@@ -78,9 +74,5 @@ public class BoardController {
 		
 		return "redirect:/board/list" + cri.getListLink();
 	}
-	
-	@GetMapping("/register")
-	public void register() {
-		
-	}
+
 }

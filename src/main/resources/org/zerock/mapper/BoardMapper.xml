@@ -65,8 +65,8 @@
 			  	(
 			  		select /*+INDEX_DESC(tbl_board pk_board) */
 			  	    	rownum rn, bno, title, content,writer,regdate,updatedate
-			  		from tbl_board
-			 	    where
+			  		  from tbl_board
+			 	     where
 		]]>	
 		  <trim prefix="(" suffix=") AND " prefixOverrides="OR">
 		  	<foreach item='type' collection="typeArr">
@@ -96,7 +96,6 @@
 		where
 		
 		<include refid="criteria"></include> <!-- 위에서 저장한 sql태그(id:criteria) 활용! -->
-		
 		bno > 0
 	</select>
 </mapper>
